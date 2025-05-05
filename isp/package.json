@@ -1,0 +1,22 @@
+{
+    "name": "isp-example",
+    "version": "1.0.0",
+    "description": "Interface Segregation Principle Example",
+    "main": "dist/main.js",
+    "type": "module",
+    "scripts": {
+        "1": "ts-node 1.number-of-args.ts",
+        "2": "ts-node 2.args-type.ts",
+        "3": "ts-node 3.return-type.ts",
+        "4": "ts-node 4.exceptions.ts",
+        "5": "ts-node 5.pre-condition.ts",
+        "6": "ts-node 6.post-condition.ts",
+        "7": "ts-node 7.invariant-class.ts",
+        "8": "ts-node 8.constraint-class.ts"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "ts-node": "^10.9.1"
+    }
+}

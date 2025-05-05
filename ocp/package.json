@@ -1,0 +1,17 @@
+{
+  "name": "ocp-example",
+  "version": "1.0.0",
+  "description": "Open-Closed Principle Example",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "ts-node main.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1"
+  }
+} 
