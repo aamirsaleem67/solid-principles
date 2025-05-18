@@ -15,4 +15,4 @@ export interface CommentActions {
 export interface CommentActionItem {
   comment: Comment;
   actions: CommentActions;
-} 
+}

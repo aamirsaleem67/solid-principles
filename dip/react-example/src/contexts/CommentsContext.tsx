@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Comment } from '../interfaces';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { Comment } from "../interfaces";
 
 export interface CommentsContextType {
   comments: Comment[];
@@ -18,41 +18,49 @@ interface CommentsProviderProps {
   children: React.ReactNode;
 }
 
-export const CommentsProvider: React.FC<CommentsProviderProps> = ({ children }) => {
+export const CommentsProvider: React.FC<CommentsProviderProps> = ({
+  children,
+}) => {
   const [comments, setComments] = useState<Comment[]>([]);
-  const [draftTexts, setDraftTexts] = useState<{[key: number]: string}>({});
+  const [draftTexts, setDraftTexts] = useState<{ [key: number]: string }>({});
 
   useEffect(() => {
-    fetchComments()
+    fetchComments();
   }, []);
 
   const fetchComments = async () => {
-    const response = await fetch('https://dummyjson.com/comments');
+    const response = await fetch("https://dummyjson.com/comments");
     const data = await response.json();
     setComments(data.comments);
   };
 
   const startEditing = (id: number) => {
-    const comment = comments.find(c => c.id === id);
+    const comment = comments.find((c) => c.id === id);
     if (comment) {
-      setDraftTexts(prev => ({ ...prev, [id]: comment.body }));
-      setComments(comments.map(comment => 
-        comment.id === id ? { ...comment, isEditing: true } : comment
-      ));
+      setDraftTexts((prev) => ({ ...prev, [id]: comment.body }));
+      setComments(
+        comments.map((comment) =>
+          comment.id === id ? { ...comment, isEditing: true } : comment,
+        ),
+      );
     }
   };
 
   const updateDraftText = (id: number, text: string) => {
-    setDraftTexts(prev => ({ ...prev, [id]: text }));
+    setDraftTexts((prev) => ({ ...prev, [id]: text }));
   };
 
   const saveEdit = (id: number) => {
     const draftText = draftTexts[id];
     if (draftText !== undefined) {
-      setComments(comments.map(comment => 
-        comment.id === id ? { ...comment, body: draftText, isEditing: false } : comment
-      ));
-      setDraftTexts(prev => {
+      setComments(
+        comments.map((comment) =>
+          comment.id === id
+            ? { ...comment, body: draftText, isEditing: false }
+            : comment,
+        ),
+      );
+      setDraftTexts((prev) => {
         const newDrafts = { ...prev };
         delete newDrafts[id];
         return newDrafts;
@@ -61,19 +69,25 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({ children }) 
   };
 
   const editComment = (id: number, text: string) => {
-    setComments(comments.map(comment => 
-      comment.id === id ? { ...comment, body: text, isEditing: false } : comment
-    ));
+    setComments(
+      comments.map((comment) =>
+        comment.id === id
+          ? { ...comment, body: text, isEditing: false }
+          : comment,
+      ),
+    );
   };
 
   const handlePinComment = (id: number, isPinned: boolean) => {
-    setComments(comments.map(comment => 
-      comment.id === id ? { ...comment, isPinned } : comment
-    ));
+    setComments(
+      comments.map((comment) =>
+        comment.id === id ? { ...comment, isPinned } : comment,
+      ),
+    );
   };
 
   const handleDeleteComment = (id: number) => {
-    setComments(comments.filter(comment => comment.id !== id));
+    setComments(comments.filter((comment) => comment.id !== id));
   };
 
   const value: CommentsContextType = {
@@ -84,7 +98,7 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({ children }) 
     saveEdit,
     handlePinComment,
     handleDeleteComment,
-    editComment
+    editComment,
   };
 
   return (
@@ -97,7 +111,7 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({ children }) 
 export const useComments = (): CommentsContextType => {
   const context = useContext(CommentsContext);
   if (!context) {
-    throw new Error('useComments must be used within a CommentsProvider');
+    throw new Error("useComments must be used within a CommentsProvider");
   }
   return context;
 };

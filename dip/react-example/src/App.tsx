@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import Comments from './Comments';
-import { CommentsProvider } from './contexts/CommentsContext';
+import React from "react";
+import "./App.css";
+import Comments from "./Comments";
+import { CommentsProvider } from "./contexts/CommentsContext";
 
 const App: React.FC = () => {
   return (
@@ -14,4 +14,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App; 
+export default App;
