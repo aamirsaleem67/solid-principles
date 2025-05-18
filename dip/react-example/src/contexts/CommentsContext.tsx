@@ -29,7 +29,7 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({
   }, []);
 
   const fetchComments = async () => {
-    const response = await fetch("https://dummyjson.com/comments");
+    const response = await fetch("https://dummyjson.com/comments?limit=10");
     const data = await response.json();
     setComments(data.comments);
   };

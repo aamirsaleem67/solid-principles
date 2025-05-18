@@ -10,7 +10,7 @@ interface CommentProps {
 const Comment: React.FC<CommentProps> = ({ comment }) => {
   const { updateDraftText, saveEdit } = useComments();
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       saveEdit(comment.id);
     }
@@ -32,7 +32,7 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
               defaultValue={comment.body}
               onChange={(e) => updateDraftText(comment.id, e.target.value)}
               onBlur={() => saveEdit(comment.id)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               autoFocus
             />
           </div>
