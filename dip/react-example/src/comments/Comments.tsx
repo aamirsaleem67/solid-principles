@@ -1,5 +1,5 @@
 import Comment from "./components/Comment";
-import { useComments } from "./contexts/CommentsContext";
+import { useComments } from "./contexts/useComments";
 
 const Comments = () => {
   const { comments } = useComments();

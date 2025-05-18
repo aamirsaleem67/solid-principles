@@ -1,7 +1,7 @@
 import React from "react";
-import { Comment as CommentType } from "../interfaces";
+import { Comment as CommentType } from "../types";
 import { CommentMenu } from "./CommentMenu";
-import { useComments } from "../contexts/CommentsContext";
+import { useComments } from "../contexts/useComments";
 
 interface CommentProps {
   comment: CommentType;

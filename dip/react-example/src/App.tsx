@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import Comments from "./Comments";
-import { CommentsProvider } from "./contexts/CommentsContext";
+import { CommentsProvider } from "./comments/contexts/CommentsContext";
+import Comments from "./comments/Comments";
 
 const App: React.FC = () => {
   return (

@@ -1,22 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { Comment } from "../interfaces";
+import React, { createContext, useState, useEffect } from "react";
+import { CommentsContextType, CommentsProviderProps, Comment } from "../types";
 
-export interface CommentsContextType {
-  comments: Comment[];
-  fetchComments: () => Promise<void>;
-  startEditing: (id: number) => void;
-  updateDraftText: (id: number, text: string) => void;
-  saveEdit: (id: number) => void;
-  togglePinComment: (id: number, isPinned: boolean) => void;
-  handleDeleteComment: (id: number) => void;
-  editComment: (id: number, text: string) => void;
-}
-
-const CommentsContext = createContext<CommentsContextType | null>(null);
-
-interface CommentsProviderProps {
-  children: React.ReactNode;
-}
+export const CommentsContext = createContext<CommentsContextType | null>(null);
 
 export const CommentsProvider: React.FC<CommentsProviderProps> = ({
   children,
@@ -68,16 +53,6 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({
     }
   };
 
-  const editComment = (id: number, text: string) => {
-    setComments(
-      comments.map((comment) =>
-        comment.id === id
-          ? { ...comment, body: text, isEditing: false }
-          : comment,
-      ),
-    );
-  };
-
   const togglePinComment = (id: number, isPinned: boolean) => {
     setComments(
       comments.map((comment) =>
@@ -88,6 +63,16 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({
 
   const handleDeleteComment = (id: number) => {
     setComments(comments.filter((comment) => comment.id !== id));
+  };
+
+  const editComment = (id: number, text: string) => {
+    setComments(
+      comments.map((comment) =>
+        comment.id === id
+          ? { ...comment, body: text, isEditing: false }
+          : comment,
+      ),
+    );
   };
 
   const value: CommentsContextType = {
@@ -106,12 +91,4 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({
       {children}
     </CommentsContext.Provider>
   );
-};
-
-export const useComments = (): CommentsContextType => {
-  const context = useContext(CommentsContext);
-  if (!context) {
-    throw new Error("useComments must be used within a CommentsProvider");
-  }
-  return context;
 };

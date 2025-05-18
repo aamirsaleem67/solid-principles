@@ -1,5 +1,5 @@
 import React from "react";
-import { CommentActionItem } from "../../interfaces";
+import { CommentActionItem } from "@/comments/types";
 
 export const PinOption: React.FC<CommentActionItem> = ({
   comment,
