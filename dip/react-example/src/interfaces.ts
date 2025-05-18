@@ -7,7 +7,7 @@ export interface Comment {
 
 export interface CommentActions {
   startEditing: (id: number) => void;
-  handlePinComment: (id: number, isPinned: boolean) => void;
+  togglePinComment: (id: number, isPinned: boolean) => void;
   handleDeleteComment: (id: number) => void;
   editComment: (id: number, text: string) => void;
 }

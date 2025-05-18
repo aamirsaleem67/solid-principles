@@ -6,7 +6,7 @@ export const PinOption: React.FC<CommentActionItem> = ({
   actions,
 }) => {
   const handleClick = () => {
-    actions.handlePinComment(comment.id, !comment.isPinned);
+    actions.togglePinComment(comment.id, !comment.isPinned);
   };
 
   return <div onClick={handleClick}>{comment.isPinned ? "Unpin" : "Pin"}</div>;

@@ -7,7 +7,7 @@ export interface CommentsContextType {
   startEditing: (id: number) => void;
   updateDraftText: (id: number, text: string) => void;
   saveEdit: (id: number) => void;
-  handlePinComment: (id: number, isPinned: boolean) => void;
+  togglePinComment: (id: number, isPinned: boolean) => void;
   handleDeleteComment: (id: number) => void;
   editComment: (id: number, text: string) => void;
 }
@@ -78,7 +78,7 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({
     );
   };
 
-  const handlePinComment = (id: number, isPinned: boolean) => {
+  const togglePinComment = (id: number, isPinned: boolean) => {
     setComments(
       comments.map((comment) =>
         comment.id === id ? { ...comment, isPinned } : comment,
@@ -96,7 +96,7 @@ export const CommentsProvider: React.FC<CommentsProviderProps> = ({
     startEditing,
     updateDraftText,
     saveEdit,
-    handlePinComment,
+    togglePinComment,
     handleDeleteComment,
     editComment,
   };
